@@ -21,8 +21,28 @@ import {
   DEFAULT_TEXT_DISTANCE,
   DEFAULT_SPIN_DURATION,
 } from '../../strings';
-import { WheelData, Wheel as WheelInterface } from './types';
+import { WheelData } from './types';
 import WheelCanvas from '../WheelCanvas';
+
+interface Props {
+  mustStartSpinning: boolean;
+  prizeNumber: number;
+  data: WheelData[];
+  onStopSpinning?: () => any;
+  backgroundColors?: string[];
+  textColors?: string[];
+  outerBorderColor?: string;
+  outerBorderWidth?: number;
+  innerRadius?: number;
+  innerBorderColor?: string;
+  innerBorderWidth?: number;
+  radiusLineColor?: string;
+  radiusLineWidth?: number;
+  fontSize?: number;
+  perpendicularText?: boolean;
+  textDistance?: number;
+  spinDuration?: number;
+}
 
 const STARTED_SPINNING = 'started-spinning';
 
@@ -48,7 +68,7 @@ export const Wheel = ({
   perpendicularText = false,
   textDistance = DEFAULT_TEXT_DISTANCE,
   spinDuration = DEFAULT_SPIN_DURATION,
-}: WheelInterface): JSX.Element | null => {
+}: Props): JSX.Element | null => {
   const [wheelData, setWheelData] = useState<WheelData[]>([...data]);
   const [startRotationDegrees, setStartRotationDegrees] = useState(0);
   const [finalRotationDegrees, setFinalRotationDegrees] = useState(0);
