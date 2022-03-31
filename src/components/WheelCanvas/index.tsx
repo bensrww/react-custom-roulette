@@ -139,8 +139,7 @@ const drawWheel = (
         centerX + Math.cos(angle + arc / 2) * textRadius,
         centerY + Math.sin(angle + arc / 2) * textRadius
       );
-      // const text = data[i].option;
-      const text = 'lol';
+      const text = data[i].option;
       const textRotationAngle = perpendicularText
         ? angle + arc / 2 + Math.PI / 2
         : angle + arc / 2;
