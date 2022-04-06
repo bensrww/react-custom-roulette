@@ -147,6 +147,19 @@ const drawWheel = (
       ctx.fillText(text, -ctx.measureText(text).width / 2, fontSize / 2.7);
       ctx.restore();
     }
+
+    // TODO: WHEEL BORDER DECORATIONS
+    ctx.beginPath();
+    // ctx.moveTo(
+    //   centerX + (outsideRadius - 1) + outerBorderWidth * 0,
+    //   centerY + (outsideRadius - 1) + outerBorderWidth * 1
+    // );
+    ctx.fillStyle = 'green';
+    
+    const cursorX = centerX + (outsideRadius - 1) * Math.cos(0);
+    const cursorY = centerY + (outsideRadius - 1) * Math.sin(0);
+    ctx.arc(cursorX, cursorY, 5, 0, 2 * Math.PI);
+    ctx.fill();
   }
 };
 
