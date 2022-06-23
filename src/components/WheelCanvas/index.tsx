@@ -119,8 +119,20 @@ const drawWheel = (
       ctx.stroke();
 
       // WHEEL INNER BORDER
-      ctx.strokeStyle =
-        innerBorderWidth <= 0 ? 'transparent' : innerBorderColor;
+      const grad = ctx.createRadialGradient(
+        centerX,
+        centerY,
+        0,
+        centerX,
+        centerY,
+        innerBorderWidth,
+      );
+
+      grad.addColorStop(0, 'rgba(255, 0, 225, 1)');
+      grad.addColorStop(1, 'rgba(133, 13, 177, 1)');
+      console.log(innerBorderColor);
+
+      ctx.strokeStyle = innerBorderWidth <= 0 ? 'transparent' : grad;
       ctx.lineWidth = innerBorderWidth;
       ctx.beginPath();
       ctx.arc(
@@ -155,7 +167,7 @@ const drawWheel = (
     //   centerY + (outsideRadius - 1) + outerBorderWidth * 1
     // );
     ctx.fillStyle = 'green';
-    
+
     const cursorX = centerX + (outsideRadius - 1) * Math.cos(0);
     const cursorY = centerY + (outsideRadius - 1) * Math.sin(0);
     ctx.arc(cursorX, cursorY, 5, 0, 2 * Math.PI);
