@@ -72,10 +72,51 @@ const drawWheel = (
 
     ctx.font = `bold ${fontSize}px Helvetica, Arial`;
 
+    const purpleSliceGradient = ctx.createRadialGradient(
+      centerX,
+      centerY,
+      0,
+      centerX,
+      centerY,
+      outsideRadius
+    );
+    purpleSliceGradient.addColorStop(0.4, 'rgba(133, 13, 177, 1)');
+    purpleSliceGradient.addColorStop(0.7, 'rgba(164, 0, 186, 1)');
+    purpleSliceGradient.addColorStop(0.8, 'rgba(133, 13, 177, 1)');
+
+    const pinkSliceGradient = ctx.createRadialGradient(
+      centerX,
+      centerY,
+      0,
+      centerX,
+      centerY,
+      outsideRadius
+    );
+    pinkSliceGradient.addColorStop(0, 'rgba(246, 47, 169, 1)');
+    // pinkSliceGradient.addColorStop(0.7, "rgba(150, 150, 150, 1)");
+    pinkSliceGradient.addColorStop(1, 'rgba(178, 31, 121, 1)');
+
+    const navySliceGradient = ctx.createRadialGradient(
+      centerX,
+      centerY,
+      0,
+      centerX,
+      centerY,
+      outsideRadius
+    );
+    navySliceGradient.addColorStop(0, 'rgb(89,9,156)');
+    navySliceGradient.addColorStop(1, 'rgb(82,6,151)');
+
+    const getSliceGradient = (index: number): CanvasGradient => {
+      if (index % 4 === 0 || index % 4 === 2) return purpleSliceGradient;
+      if (index % 4 === 1) return pinkSliceGradient;
+      return navySliceGradient;
+    };
+
     for (let i = 0; i < data.length; i++) {
       const angle = startAngle + i * arc;
       const { style } = data[i];
-      ctx.fillStyle = (style && style.backgroundColor) as string;
+      ctx.fillStyle = getSliceGradient(i);
 
       ctx.beginPath();
       ctx.arc(centerX, centerY, outsideRadius, angle, angle + arc, false);
@@ -125,7 +166,7 @@ const drawWheel = (
         0,
         centerX,
         centerY,
-        innerBorderWidth,
+        innerBorderWidth
       );
 
       grad.addColorStop(0, 'rgba(255, 0, 225, 1)');
